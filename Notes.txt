@@ -1,0 +1,22 @@
+Fresh start
+
+I used different web pages for demo 3 because the drop downs were getting refreshed and selected data was also refreshed with it.
+Now trying to update graph on index page itself.
+When I serched for ways to do this, I found that using 'fetch' in javascript helps.
+However, it didn't work for me. Afteer many attempts, I tried without using a form in the index.html file. That seems to have done the trick.
+
+(I am seeing the below error:
+ "GET /favicon.ico HTTP/1.1" 404 -
+But it seems I can ignore this
+This error means that the browser is looking for a favicon and it is what a browser does.
+There are ways to add favicon. But not looking into them for now.)
+
+Then I wanted to add a reset button that would reoload the template with selection cleared and graph for all counts shown. This needed a form.
+So, I added the below code:
+@app.route('/reset_vals', methods=['GET', 'POST'])
+def reset_vals():
+    plot_var = graph_all_counts()
+    return render_template('index.html',  years=years, months=wc.month_names, last_date=wc.last_date_str, plot_var=plot_var)
+
+
+However, I searched some more and found that we can use "windows.location.reload()" with a regular button (without needing a form and 'submit' button)
